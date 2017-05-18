@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 import NewPlaylist from './NewPlaylist';
 
 const Sidebar = (props) => {
+  const playlists = props.playlists;
+  const addPlaylist = props.addPlaylist;
+  console.log(playlists);
 
   return (
     <sidebar>
@@ -20,6 +23,17 @@ const Sidebar = (props) => {
       <hr />
       <section>
         <h4 className="text-muted">PLAYLISTS</h4>
+        <hr />
+          <ul className="list-unstyled">
+          {playlists ? playlists.map(playlist => {
+            return (
+              <li key={playlist.id} className="playlist-item menu-item">
+                <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+              </li>        
+            )
+          })
+          : null}
+          </ul>
         <h4>
           <Link className="btn btn-primary btn-block" to='/NewPlaylist'>
             <span className="glyphicon glyphicon-plus"></span> PLAYLIST

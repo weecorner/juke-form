@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NewPlaylist from '../components/NewPlaylist';
 import initialState from '../initialState';
 import axios from 'axios';
+import
 
 export default class NewPlaylistContainer extends Component {
 	constructor(props) {
@@ -44,13 +45,10 @@ export default class NewPlaylistContainer extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		console.log(this.state.formValue);
-		this.setState({formValue: ''});
+		const addPlaylist = this.props.addPlaylist;
+		addPlaylist(this.state.formValue);
 
-		axios.post('/api/playlists/', {name: this.state.formValue})
-		  .then(res => res.data)
-		  .then(result => {
-		    console.log(result) // response json from the server!
-		  });
+		const path = `/playlists/${this.state.formValue}`
 
 		
 	}
